@@ -1,0 +1,49 @@
+{% load humanize %}
+
+
+<div class="container">
+    <table class="table table-sm">
+        <thead class="thead-dark">
+          <tr>
+            <th scope="col">Name</th>
+            <th scope="col">Year</th>
+            <th scope="col" style="text-align: right;">Population</th>
+          </tr>
+        </thead>
+        <tbody>
+            {% for population in population_list %}
+              <tr>
+                <td>{{population.name}}</td>
+                <td>{{population.year}}</td>
+                <td style="text-align: right;">{{population.value|intcomma}}</td>
+              </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+<div class="row">
+    {% if population_list.has_other_pages %}
+    <ul class="pagination">
+        {% if population_list.has_previous %}
+        <li><a href="?page={{ population_list.previous_page_number }}{% if name %}&name={{name}}{% endif %}">&laquo;</a></li>
+        {% else %}
+        <li class="disabled"><span>&laquo;</span></li>
+        {% endif %}
+        {% for i in population_list.paginator.page_range %}
+        {% if population_list.number == i %}
+        <li class="active"><span>{{ i }} <span class="sr-only"></span></span></li>
+        {% elif i > population_list.number|add:'-4' and i < population_list.number|add:'4' %} <li><a
+                href="?page={{ i }}{% if name %}&name={{name}}{% endif %}">{{i}}</a>
+            </li>
+            {% endif %}
+            {% endfor %}
+            {% if population_list.has_next %}
+            <li><a
+                    href="?page={{ population_list.next_page_number }}{% if name %}&name={{name}} {% endif %}">&raquo;</a>
+            </li>
+            {% else %}
+            <li class="disabled"><span>&raquo;</span></li>
+            {% endif %}
+    </ul>
+    {% endif %}
+</div>
