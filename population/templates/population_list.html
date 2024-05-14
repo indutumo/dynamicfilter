@@ -2,6 +2,10 @@
 {% block content %}
 
 <div class="container">
+	<div class="card-body" style="padding-bottom: 2%;">
+    	<a href="{% url 'population_list_pdf' %}" class="btn btn-small btn-primary">PDF</a>
+    </div>
+
     <form method="GET" action="{% url 'population_list' %}">
       	<div class="row">
           	<div  class="col s12 m12 l4">
@@ -12,21 +16,7 @@
             	<input type="text"  name="year" placeholder="Year" {% if year %} value="{{year}}" {% endif %} 
             	hx-get="{% url 'population_filter' %}" hx-trigger="keyup delay:500ms" hx-target="#search-results" class="form-control">
           	</div>
-          	<div  class="col s12 m12 l2">
-				<select class="form-control" name="year" hx-get="{% url 'population_filter' %}" hx-trigger="change" hx-target="#search-results">
-				    <option value="">Select Year</option>
-				    {% for year in  year_list %}
-				    <option value="{{ year }}">{{ year }}</option>
-				    {% endfor %}
-				</select> 
-          	</div>
-          	<div  class="col s12 m12 l3">
-				<select class="form-control" name="name" hx-get="{% url 'population_filter' %}" hx-trigger="change" hx-target="#search-results">
-				    <option value="">Select Country</option>
-				    {% for name in  country_list %}
-				    <option value="{{ name }}">{{ name }}</option>
-				    {% endfor %}
-				</select> 
+          	<div  class="col s12 m12 l5">
           	</div>
           	<div class="form-group col s12 m12 l1">
               	<button type="submit" class="btn btn-primary">Search</button>

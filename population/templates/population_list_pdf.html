@@ -1,0 +1,82 @@
+<!doctype html>
+{% load humanize %}
+{% load static %}
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>World Population</title>
+<style type="text/css">
+        @page {
+            size: A4;
+            margin: 1cm;
+        }
+        .table2 th,
+        .table2 td {
+            font-size: 1.1em;
+            font-family: 'Times New Roman', serif;
+            font-weight: normal;
+            padding-left: 0px !important;
+            border-bottom: 1px solid grey;
+            border-collapse: collapse; 
+            padding: 3px;
+
+        }
+       .table2 th {
+            color: blue;
+       }
+        .table1 th,
+        .table1 td {
+            font-size: 1.2em;
+            font-family: 'Times New Roman', serif;
+            font-weight: normal;
+            text-align: center;
+            padding-left: 0px !important;
+            border-collapse: collapse; 
+        }
+        .table3 th,
+        .table3 td {
+            font-size: 1.2em;
+            font-family: 'Times New Roman', serif;
+            font-weight: normal;
+            text-align: right;
+            padding-left: 0px !important;
+            border-collapse: collapse; 
+        }
+</style>
+</head>
+    <body>
+        <table class="table1">
+            <tr> <th>Zola Coding School</th></tr>
+            <tr> <th>09345682527 / 09863524671</th></tr>
+            <tr> <th>admin@zolacodingschool.com</th></tr>
+            <tr> <th>https://zolacodingschool.com</th></tr>
+        </table>
+        <hr>
+
+        <table class="table2">
+            <thead>
+                <tr>   
+                    <th style="text-align: left;">Country</th>
+                    <th style="text-align: left;">Code</th>
+                    <th style="text-align: left;">Year</th>
+                    <th style="text-align: right;">Population</th>
+                </tr>
+            </thead>
+
+            <tbody>
+              {% for population in population_list  %}
+                <tr>   
+                  <td style="text-align: left;">{{population.name}}</td>
+                  <td style="text-align: left;">{{population.code}}</td>
+                  <td style="text-align: left;">{{population.year}}</td>
+                  <td style="text-align: right;">{{population.value|intcomma}}</td>
+                </tr>
+              {% endfor %}
+            </tbody>
+      </table>
+      <br>
+        <table class="table3">
+            <tr><th>Total</th><td>{{population|floatformat:2|intcomma}}</td></tr>
+        </table>
+    </body>
+</html>
